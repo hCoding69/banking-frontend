@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AddressRequest, ClientRequest, ClientService } from '../../services/client/client-service';
+import { Observable } from 'rxjs';
+import { Role, RoleService } from '../../features/admin/services/role-service';
 
 @Component({
   selector: 'app-waiting-screen',
@@ -15,7 +17,7 @@ export class WaitingScreen {
   message : string = '';
   userStatus: string = '';
   userId: number = 0 ;
-  constructor(private authService: AuthService, private router: Router, private http: HttpClient, private clientService: ClientService) {}
+  constructor(private authService: AuthService,private roleService: RoleService, private router: Router, private http: HttpClient, private clientService: ClientService) {}
 
   ngOnInit() {
     this.authService.currentUser$.subscribe(user=> {
@@ -23,7 +25,10 @@ export class WaitingScreen {
       this.userStatus = user?.userStatus || '';
       this.userId = user?.id || 0;
     });
+
+
   }
+
 
   logout() {
     this.authService.logout().subscribe({
@@ -74,29 +79,13 @@ export class WaitingScreen {
   }
 
   createClient(){
-    const ar: AddressRequest = {
-      city: "Casablanca",
-      country: "Maroc",
-      postalCode: "20000",
-      street: "Boulevard Zerktouni"
-    };
-    const cr: ClientRequest = {
-      firstname: "Hamza",
-      lastName: "Bennouna",
-      email: "hamza@example.com",
-      birthDate: "2003-05-10", // format ISO string
-      phone: "+212600000000",
-      addressRequest: ar,
-      userId: 1
-    };
-
-    this.clientService.createClient(cr).subscribe({
-      next : (response) =>{
-        console.log(response)
+    this.roleService.getRolesWithPermissions().subscribe({
+      next: (response) =>{
+        console.log("roles: ", response)
       },
-      error : (error) => {
+      error: (error) =>{
         console.log(error)
       }
-      })
-    }
+    })
   }
+}

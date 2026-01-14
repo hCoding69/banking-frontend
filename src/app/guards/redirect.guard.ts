@@ -14,7 +14,7 @@ export class RedirectGuard implements CanActivate {
 
   canActivate() {
     return this.http.get<UserResponse>(
-      'http://localhost:8082/api/users/me',
+      'http://localhost:8090/api/users/me',
       { withCredentials: true }
     ).pipe(
       map(user => {

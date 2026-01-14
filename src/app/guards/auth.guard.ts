@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate() {
       return this.http.post(
-        'http://localhost:8082/api/auth/refresh-token',
+        'http://localhost:8090/api/auth/refresh-token',
         {},
         { withCredentials: true }
       ).pipe(

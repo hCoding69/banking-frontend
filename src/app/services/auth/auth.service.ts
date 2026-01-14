@@ -49,16 +49,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  private readonly API_URL = 'http://localhost:8082/api/auth';
+  private readonly API_URL = 'http://localhost:8090/api/auth';
   private currentUserSubject = new BehaviorSubject<UserResponse | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
   public register(request: RegisterRequest): Observable<RegisterResponse>  {
-    return this.http.post<RegisterResponse>(`${this.API_URL}/register`, request, { withCredentials: true });
+    return this.http.post<RegisterResponse>(`http://localhost:8090/api/auth/register`, request, { withCredentials: true });
   }
 
   public login(request: AuthRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.API_URL}/login`, request, { withCredentials: true });
+    return this.http.post<AuthResponse>(`http://localhost:8090/api/auth/login`, request, { withCredentials: true });
   }
 
   public refreshToken(): Observable<AuthResponse> {
@@ -81,7 +81,7 @@ export class AuthService {
   }
 
   getCurrentUser():Observable<UserResponse> {
-    return this.http.get<UserResponse>('http://localhost:8082/api/users/me', { withCredentials: true })
+    return this.http.get<UserResponse>('http://localhost:8090/api/users/me', { withCredentials: true })
   }
 
   loadCurrentUser(): Observable<UserResponse | null> {
