@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AddressRequest, ClientRequest, ClientService } from '../../services/client/client-service';
 import { Observable } from 'rxjs';
 import { Role, RoleService } from '../../features/admin/services/role-service';
+import { PernissionService } from '../../features/admin/services/pernission-service';
 
 @Component({
   selector: 'app-waiting-screen',
@@ -17,7 +18,13 @@ export class WaitingScreen {
   message : string = '';
   userStatus: string = '';
   userId: number = 0 ;
-  constructor(private authService: AuthService,private roleService: RoleService, private router: Router, private http: HttpClient, private clientService: ClientService) {}
+  constructor(private authService: AuthService,
+              private roleService: RoleService, 
+              private router: Router, 
+              private http: HttpClient, 
+              private permissionService : PernissionService,
+              private clientService: ClientService
+            ) {}
 
   ngOnInit() {
     this.authService.currentUser$.subscribe(user=> {
@@ -77,11 +84,16 @@ export class WaitingScreen {
       error: (err) => console.error('Erreur:', err)
     });
   }
+  req : Role = {
+    id: null,
+    name: 'ROLE_UPJJJJDATE_TEST',
+    description: 'Ro de mise à jour de test'
+  }
 
   createClient(){
-    this.roleService.getRolesWithPermissions().subscribe({
+    this.permissionService.getPermissions().subscribe({
       next: (response) =>{
-        console.log("roles: ", response)
+        console.log("Permissions: ", response)
       },
       error: (error) =>{
         console.log(error)
