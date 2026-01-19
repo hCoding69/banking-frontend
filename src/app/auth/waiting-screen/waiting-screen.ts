@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AddressRequest, ClientRequest, ClientService } from '../../services/client/client-service';
 import { Observable } from 'rxjs';
 import { Role, RoleService } from '../../features/admin/services/role-service';
-import { PernissionService } from '../../features/admin/services/pernission-service';
+import { PermissionDTO, PermissionService } from '../../features/admin/services/permission-service';
 
 @Component({
   selector: 'app-waiting-screen',
@@ -19,11 +19,11 @@ export class WaitingScreen {
   userStatus: string = '';
   userId: number = 0 ;
   constructor(private authService: AuthService,
-              private roleService: RoleService, 
-              private router: Router, 
-              private http: HttpClient, 
-              private permissionService : PernissionService,
-              private clientService: ClientService
+              private roleService: RoleService,
+              private router: Router,
+              private http: HttpClient,
+              private clientService: ClientService,
+              private permissionService: PermissionService
             ) {}
 
   ngOnInit() {
@@ -84,14 +84,12 @@ export class WaitingScreen {
       error: (err) => console.error('Erreur:', err)
     });
   }
-  req : Role = {
-    id: null,
-    name: 'ROLE_UPJJJJDATE_TEST',
-    description: 'Ro de mise à jour de test'
+  permission : PermissionDTO = {
+    "name": "VIEW_CUSTOMERS",
+    "description": "Consulter les informations des clients, lecture seule."
   }
-
   createClient(){
-    this.permissionService.getPermissions().subscribe({
+    this.permissionService.createPermission(this.permission).subscribe({
       next: (response) =>{
         console.log("Permissions: ", response)
       },
