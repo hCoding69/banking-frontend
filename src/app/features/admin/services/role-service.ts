@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
+import { PermissionDTO } from './permission-service';
 
 export interface Role {
-  id : number;
+  id : number | null;
   name : string;
   description : string
 }
@@ -48,6 +49,14 @@ export class RoleService {
 
   deleteRole(roleId: number): Observable<string>{
     return this.http.delete<string>(`${this.apiUrl}/${roleId}`)
+  }
+
+  addPermissionsToRole(permissions: PermissionDTO[], roleId: number){
+    return this.http.post<string>(`${this.apiUrl}/${roleId}/permissions`, permissions, {withCredentials: true})
+  }
+
+  removePermissionFromRole(roleId: number, permissionId: number): Observable<string>{
+    return this.http.delete<string>(`${this.apiUrl}/${roleId}/permissions/${permissionId}`, {withCredentials: true})
   }
 
 
