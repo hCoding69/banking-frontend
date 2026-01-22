@@ -71,6 +71,7 @@ protected readonly isMobile = signal(false);
 
   private readonly _mobileQuery: MediaQueryList;
   private readonly _mobileQueryListener: () => void;
+  toggle = true;
 
   constructor(private router : Router) {
     const media = inject(MediaMatcher);

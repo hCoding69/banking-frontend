@@ -5,6 +5,7 @@
 
 mat-sidenav-container {
   padding: 0px !important;
+
 }
 
 mat-nav-list {
@@ -12,6 +13,8 @@ mat-nav-list {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px !important;
+      padding-top: 8px !important;
+
 }
 
 ::ng-deep a.mat-button:hover {
@@ -43,6 +46,7 @@ mat-nav-list {
   vertical-align: middle;
   margin-left: 5px !important;
   padding-left: 20px !important;
+  height: 36px !important;
     mat-icon {
   color: #202124 !important;
     vertical-align: middle; /* centre sur la ligne de texte */
@@ -56,11 +60,12 @@ mat-nav-list {
   width: 100%;
   justify-content: flex-start;
   text-align: left;
+    height: 36px !important;
+
   color: #1977d2 !important;
   padding: 0px 8px !important;
   font-size: 14px !important;
   font-weight: 400 !important;
-  vertical-align: middle;
   vertical-align: middle;
   margin-left: 4px !important;
   padding-left: 20px !important;
