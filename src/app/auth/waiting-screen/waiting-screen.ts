@@ -84,12 +84,23 @@ export class WaitingScreen {
       error: (err) => console.error('Erreur:', err)
     });
   }
-  permission : PermissionDTO = {
-    "name": "VIEW_CUSTOMERS",
-    "description": "Consulter les informations des clients, lecture seule."
-  }
+  permission : PermissionDTO[] = [
+  { "id": 17, "name": "VIEW_ACCOUNT", "description": "Consulter les comptes" },
+  { "id": 27, "name": "VIEW_TRANSACTION_HISTORY", "description": "Consulter l’historique des transactions" },
+  { "id": 37, "name": "VIEW_INVESTMENT_PORTFOLIO", "description": "Consulter le portefeuille d’investissements" },
+  { "id": 44, "name": "VIEW_AUDIT_LOGS", "description": "Consulter les journaux d’audit" }
+]
+
+
+
+
+
+
+
+
+
   createClient(){
-    this.permissionService.createPermission(this.permission).subscribe({
+    this.roleService.getRoles().subscribe({
       next: (response) =>{
         console.log("Permissions: ", response)
       },
