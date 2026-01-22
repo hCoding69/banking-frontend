@@ -1,4 +1,18 @@
-
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* clé 🔑 */
+}
 .body {
   display: flex;
+  flex: 1;              /* clé 🔑 */
+  min-height: 0;        /* évite bugs de scroll */
+}
+app-sidebar {
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;              /* prend le reste */
+  overflow: auto;       /* scroll uniquement ici */
 }

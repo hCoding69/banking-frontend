@@ -33,38 +33,12 @@ interface NavItem {
 export class Sidebar {
 
 readonly navItems: NavItem[] = [
+
     {
-      label: 'Dashboard',
-      icon: 'dashboard',
-      route: '/layout'
-    },
-    {
-      label: 'Identity & Access',
+      label: 'Roles & Permissions',
       icon: 'security',
-      children: [
-        { label: 'Users', icon: 'person', route: '/users' },
-        { label: 'Roles', icon: 'badge', route: '/roles' },
-        { label: 'Permissions', icon: 'vpn_key', route: '/permissions' }
-      ]
+      route: '/admin/roles'
     },
-    {
-      label: 'Organization',
-      icon: 'apartment',
-      children: [
-        { label: 'Companies', icon: 'business', route: '/companies' },
-        { label: 'Teams', icon: 'groups', route: '/teams' }
-      ]
-    },
-    {
-      label: 'Audit & Security',
-      icon: 'fact_check',
-      route: '/audit'
-    },
-    {
-      label: 'Administration',
-      icon: 'settings',
-      route: '/admin'
-    }
   ];
 
 protected readonly isMobile = signal(false);

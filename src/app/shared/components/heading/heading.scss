@@ -1,0 +1,23 @@
+h1 {
+  color: #202124;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0 48px 0 16px;
+  padding: 0 4px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+  background-color: white !important;
+}
+mat-toolbar {
+  background-color: white !important;
+  box-shadow: none !important;
+  height: 49px;
+  border-bottom: #DADCE0  1px solid !important;
+  padding: 0px 8px !important;
+  width: 100% !important;
+}
+
+
+

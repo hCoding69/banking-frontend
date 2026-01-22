@@ -8,6 +8,8 @@ import { EmptyComponent } from './auth/empty-component/empty-component';
 import { RedirectGuard } from './guards/redirect.guard';
 import { LoginGuard } from './guards/login.guard';
 import { MainLayout } from './layout/main-layout/main-layout';
+import { Roles } from './features/admin/pages/roles/roles';
+import { Title } from '@angular/platform-browser';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -17,7 +19,20 @@ export const routes: Routes = [
     { path: 'auth/waiting-screen', component: WaitingScreen, canActivate: [AuthGuard] },
     { path: 'auth/redirect', canActivate: [RedirectGuard], component: EmptyComponent},
     { path: 'forbidden', component: EmptyComponent },
-    { path: 'layout', component: MainLayout },
+    {
+    path: 'admin',
+    component: MainLayout,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'roles',
+        component: Roles,
+        data : {
+          title : "Roles & Permissions"
+        }
+      },
+    ]
+  }
+
 
 
 
