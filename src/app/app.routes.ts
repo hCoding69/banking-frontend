@@ -7,6 +7,7 @@ import { WaitingScreen } from './auth/waiting-screen/waiting-screen';
 import { EmptyComponent } from './auth/empty-component/empty-component';
 import { RedirectGuard } from './guards/redirect.guard';
 import { LoginGuard } from './guards/login.guard';
+import { MainLayout } from './layout/main-layout/main-layout';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -15,7 +16,9 @@ export const routes: Routes = [
     { path: 'dashboard/home', component: Home, canActivate: [AuthGuard] },
     { path: 'auth/waiting-screen', component: WaitingScreen, canActivate: [AuthGuard] },
     { path: 'auth/redirect', canActivate: [RedirectGuard], component: EmptyComponent},
-        { path: 'forbidden', component: EmptyComponent },
+    { path: 'forbidden', component: EmptyComponent },
+    { path: 'layout', component: MainLayout },
+
 
 
 
