@@ -4,11 +4,18 @@
 <div class="page-header">
   <h2 class="page-title">User Roles and Permissions Management</h2>
   <p class="page-subtitle">
-    This section allows you to define and manage user roles,
-    as well as the permissions associated with each role to control access to system features.
+   A role is a group of permissions that you can assign to users. You can create a role and add permissions to it.
   </p>
 </div>
 
-
+  <div class="action">
+    <button matButton class="btn-straight">
+      <mat-icon matIconPrefix>add</mat-icon>
+      Create role
+    </button>
+  </div>
+  <mat-form-field appearance="outline" class="search-field">
+    <input matInput placeholder="Simple placeholder" required />
+  </mat-form-field>
   <app-table [columns] = "columns"  [data]="data"></app-table>
 </div>

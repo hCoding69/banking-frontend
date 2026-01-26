@@ -1,7 +1,6 @@
 @use '@angular/material' as mat;
 table {
   width: 100%;
-  margin-top: 30px;
 }
 .my-table-container {
   @include mat.table-overrides((

@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
 import { TableColumn, TableComponent } from "../../../../shared/components/table/table";
 import Table from '@mui/material/Table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from "@angular/material/input";
+import { MatIconModule } from '@angular/material/icon';
 
 export interface PeriodicElement {
   name: string;
@@ -15,7 +18,7 @@ export interface PeriodicElement {
 
 @Component({
   selector: 'app-roles',
-  imports: [Heading, MatTableModule, TableComponent],
+  imports: [Heading, MatTableModule, TableComponent, MatButtonModule, MatInputModule, MatIconModule],
   templateUrl: './roles.html',
   styleUrl: './roles.scss',
 })
