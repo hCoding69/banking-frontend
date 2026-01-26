@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+table {
+  width: 100%;
+  margin-top: 30px;
+}
+.my-table-container {
+  @include mat.table-overrides((
+       header-container-height: 20px,      // hauteur du header
+    row-item-container-height: 20px ,    // hauteur des lignes
+    background-color: #FFFFFF,             // fond des lignes
+    row-item-label-text-color : #5f6368, // couleur du texte des lignes
+    // couleur du texte du header
+  ));
+}
+
+th {
+  background-color: #F1F3F4 !important; // fond du header
+  color: #202124;          // texte noir
+  font-size: 14px;
+    border-top: 1px solid #DADCE0 !important;
+
+}
+th, td {
+  padding: 4px 16px !important;
+  border-bottom: 1px solid #DADCE0 !important;
+;
+}
+
+
+
