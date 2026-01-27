@@ -7,13 +7,9 @@ import Table from '@mui/material/Table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from '@angular/material/icon';
+import { Permission, Role, RoleService, RoleWithPermission } from '../../services/role-service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+
 
 
 @Component({
@@ -24,31 +20,75 @@ export interface PeriodicElement {
 })
 export class Roles {
   title : string = "";
-  constructor(private route : ActivatedRoute){
+  roles : Role[] = []
+  permissions: RoleWithPermission[] = []
+  constructor(private route : ActivatedRoute, private roleService : RoleService){
     const data = route.snapshot.data;
     this.title = data['title'];
   }
 
-  data: any[] = [
-  {weight: 1.0079, symbol: 'H'},
-  {weight: 4.0026, symbol: 'He'},
-  {weight: 6.941, symbol: 'Li'},
-  {weight: 9.0122, symbol: 'Be'},
-  {weight: 10.811, symbol: 'B'},
-  {weight: 12.0107, symbol: 'C'},
-  {weight: 14.0067, symbol: 'N'},
-  {weight: 15.9994, symbol: 'O'},
-  {weight: 18.9984, symbol: 'F'},
-  {weight: 20.1797, symbol: 'Ne'},
-]
-columns : TableColumn[] = [
-  {
-    columnDef: "weight",
-    header: "Weight"
-  },
-  {
-    columnDef: "symbol",
-    header: "Symbol"
+  columns : TableColumn[] = [
+    {
+      columnDef: "id",
+      header: "ID"
+    },
+    {
+      columnDef: "name",
+      header: "Name",
+      format: (value: string) => value.replace("ROLE_", "").replaceAll("_", " ").toLowerCase()
+    },
+    {
+      columnDef: "permissions",
+      header: "Permissions",
+ format: (value: Permission[], row: RoleWithPermission) => {
+      if (!row.permissions || row.permissions.length === 0) return '-';
+      return row.permissions.map(p => p.name).join(', '); // simple text
+    }    },
+    {
+      columnDef: 'actions',
+      header: '',
+      actions: [
+        {
+          label: 'Edit role',
+          icon: 'edit',
+          action: (role) => this.editRole(role)
+        },
+        {
+          label: 'Delete role',
+          icon: 'delete',
+          visible: (role) => role.name !== 'ROLE_SUPER_ADMIN',
+          action: (role) => this.deleteRole(role)
+        }
+      ]
+    }
+
+
+  ]
+
+  ngOnInit(){
+    this.getRoles()
   }
-]
+
+  getRoles()  {
+    this.roleService.getRolesWithPermissions().subscribe({
+      next : (response) => {
+        console.log(response)
+  this.roles = [...response]; // new reference
+
+      },
+      error : (error) => {
+        console.log(error)
+      }
+    })
+  }
+editRole(role: Role) {
+  console.log("Edit", role);
+}
+
+deleteRole(role: Role) {
+  console.log("Delete", role);
+}
+
+
+
 }

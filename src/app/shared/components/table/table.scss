@@ -12,6 +12,7 @@ table {
   ));
 }
 
+
 th {
   background-color: #F1F3F4 !important; // fond du header
   color: #202124;          // texte noir
@@ -19,11 +20,72 @@ th {
     border-top: 1px solid #DADCE0 !important;
 
 }
+tr:hover {
+  background-color: #F7F8F8 !important; // fond des lignes au survol
+}
 th, td {
   padding: 4px 16px !important;
   border-bottom: 1px solid #DADCE0 !important;
-;
+    font-size: 14px;
 }
 
 
+mat-icon {
+  font-size: 16px !important;
+  color: #202124 !important;
+  width: 18px;
+  height: 18px;
+}
 
+.action-btn {
+    width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+
+
+
+}
+
+.action-btn:hover {
+  background-color: #E8EAED !important;
+    width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+
+}
+
+
+::ng-deep .mat-mdc-menu-panel {
+  @include mat.menu-overrides((
+    container-color: #ffffff,
+    item-label-text-size: 14px,
+    item-label-text-color : #202124,
+    container-shape: 0px,
+
+
+  ));
+  min-height: auto !important;
+}
+::ng-deep .mat-mdc-menu-item {
+  min-height: auto !important;
+  padding: 6px 16px !important;
+  font-weight: 400 !important;
+}
+::ng-deep .mat-mdc-menu-item-text {
+  font-weight: 400 !important;
+  font-size: 14px !important;
+}
