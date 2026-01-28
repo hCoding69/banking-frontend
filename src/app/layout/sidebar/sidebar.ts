@@ -63,6 +63,7 @@ protected readonly isMobile = signal(false);
   }
 
 isActive(item: any): boolean {
-  return this.router.url === item.route;
+  if (!item.route) return false;
+  return this.router.url.startsWith(item.route);
 }
 }

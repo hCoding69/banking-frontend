@@ -10,8 +10,11 @@ import { LoginGuard } from './guards/login.guard';
 import { MainLayout } from './layout/main-layout/main-layout';
 import { Roles } from './features/admin/pages/roles/roles';
 import { Title } from '@angular/platform-browser';
+import { CreateRole } from './features/admin/pages/create-role/create-role';
+
 
 export const routes: Routes = [
+  
     { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
     { path: 'auth/register', component: Register},
     { path: 'auth/login', component: Login, canActivate: [LoginGuard]},
@@ -23,13 +26,20 @@ export const routes: Routes = [
     path: 'admin',
     component: MainLayout,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'roles/create',
+        component: CreateRole,
+        data : {
+          title : "Create role"
+        }
+      },
       { path: 'roles',
         component: Roles,
         data : {
           title : "Roles & Permissions"
         }
       },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
     ]
   }
 

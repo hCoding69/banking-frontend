@@ -4,48 +4,29 @@
     [opened]="!isMobile() && toggle"
     class="sidenav">
 
-
-
     <mat-nav-list>
-      <ng-container *ngFor="let item of navItems" class="ff">
-<div class="ff">
-  <a  class="nav-item" [ngClass]="{'nav-item-active' : isActive(item)}" matButton *ngIf="!item.children" [routerLink]="item.route">
-    <mat-icon matListIcon>{{ item.icon }}</mat-icon>
-    <span matLine>{{ item.label }}</span>
-  </a>
-  @if(isActive(item)) {
-  <span class="leftbar"></span>
-
-  }
-</div>
-
-
-        <!-- Simple link -->
-
-
-        <!-- Group -->
-        <!-- <mat-expansion-panel *ngIf="item.children" flat>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <mat-icon>{{ item.icon }}</mat-icon>
-              {{ item.label }}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <a mat-list-item
-             *ngFor="let child of item.children"
-             [routerLink]="child.route">
-            <mat-icon matListIcon>{{ child.icon }}</mat-icon>
-            {{ child.label }}
+      <ng-container *ngFor="let item of navItems">
+        <div class="ff">
+          <a 
+            class="nav-item" 
+            [ngClass]="{'nav-item-active': isActive(item)}" 
+            matButton 
+            *ngIf="!item.children" 
+            [routerLink]="item.route">
+            <mat-icon matListIcon>{{ item.icon }}</mat-icon>
+            <span matLine>{{ item.label }}</span>
           </a>
-        </mat-expansion-panel> -->
-
+          @if(isActive(item)) {
+            <span class="leftbar"></span>
+          }
+        </div>
       </ng-container>
     </mat-nav-list>
 
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+    <!-- ❌ SUPPRIMEZ CETTE LIGNE -->
+    <!-- <router-outlet></router-outlet> -->
   </mat-sidenav-content>
 </mat-sidenav-container>

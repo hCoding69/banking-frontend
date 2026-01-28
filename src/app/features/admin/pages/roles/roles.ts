@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Heading } from '../../../../shared/components/heading/heading';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
 import { TableColumn, TableComponent } from "../../../../shared/components/table/table";
 import Table from '@mui/material/Table';
@@ -14,7 +14,7 @@ import { Permission, Role, RoleService, RoleWithPermission } from '../../service
 
 @Component({
   selector: 'app-roles',
-  imports: [Heading, MatTableModule, TableComponent, MatButtonModule, MatInputModule, MatIconModule],
+  imports: [Heading, MatTableModule, TableComponent, MatButtonModule, MatInputModule, MatIconModule, RouterOutlet],
   templateUrl: './roles.html',
   styleUrl: './roles.scss',
 })
@@ -22,7 +22,7 @@ export class Roles {
   title : string = "";
   roles : Role[] = []
   permissions: RoleWithPermission[] = []
-  constructor(private route : ActivatedRoute, private roleService : RoleService){
+  constructor(private route : ActivatedRoute, private roleService : RoleService, private router : Router){
     const data = route.snapshot.data;
     this.title = data['title'];
   }
@@ -38,12 +38,18 @@ export class Roles {
       format: (value: string) => value.replace("ROLE_", "").replaceAll("_", " ").toLowerCase()
     },
     {
-      columnDef: "permissions",
-      header: "Permissions",
- format: (value: Permission[], row: RoleWithPermission) => {
-      if (!row.permissions || row.permissions.length === 0) return '-';
-      return row.permissions.map(p => p.name).join(', '); // simple text
-    }    },
+      columnDef: "description",
+      header: "Description",
+    },
+
+//     {
+//       columnDef: "permissions",
+//       header: "Permissions",
+//  format: (value: Permission[], row: RoleWithPermission) => {
+//       if (!row.permissions || row.permissions.length === 0) return '-';
+//       return row.permissions.map(p => p.name).join(', '); // simple text
+//     }    
+//   },
     {
       columnDef: 'actions',
       header: '',
@@ -69,6 +75,10 @@ export class Roles {
     this.getRoles()
   }
 
+
+navigate() {
+  this.router.navigate(['create'], { relativeTo: this.route });
+}
   getRoles()  {
     this.roleService.getRolesWithPermissions().subscribe({
       next : (response) => {
